@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
-
-import static org.springframework.ai.chat.memory.ChatMemory.CONVERSATION_ID;
+import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_CONVERSATION_ID_KEY;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,7 +20,7 @@ public class GameController {
     public Flux<String> chat(String prompt, String chatId) {
         return gameChatClient.prompt()
                 .user(prompt)
-                .advisors(a -> a.param(CONVERSATION_ID,chatId))
+                .advisors(a -> a.param(CHAT_MEMORY_CONVERSATION_ID_KEY,chatId))
                 .stream()
                 .content();
     }

@@ -34,7 +34,7 @@ public class ChatHistoryController {
      */
     @GetMapping("/{type}/{chatId}")
     public List<MessageVO> getChatHistory(@PathVariable("type") String type, @PathVariable("chatId") String chatId) {
-        List<Message> messages = chatMemory.get(chatId);
+        List<Message> messages = chatMemory.get(chatId,Integer.MAX_VALUE);
         if(messages == null) {
             return List.of();
         }
